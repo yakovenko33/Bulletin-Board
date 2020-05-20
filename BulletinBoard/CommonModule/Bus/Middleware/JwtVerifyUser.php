@@ -4,9 +4,8 @@
 namespace MyProject\CommonModule\JWT\Middleware;
 
 
-use MyProject\CommonModule\CommonHandler\Interfaces\ResultHandlerInterface;
-use MyProject\CommonModule\JWT\Command\Interfaces\VerifyCommandQueryInterface;
-use MyProject\CommonModule\JWT\JwtDecorator;
+use BulletinBoard\CommonModule\Bus\Handler\ResultHandlerInterface;
+use BulletinBoard\CommonModule\Bus\JWT\JwtDecorator;
 use League\Tactician\Middleware;
 
 class JwtVerifyUser implements Middleware
@@ -26,9 +25,9 @@ class JwtVerifyUser implements Middleware
     }
 
     /**
-     * @param VerifyCommandQueryInterface $command
+     * @param object $command
      * @param callable $next
-     * @return mixed
+     * @return ResultHandlerInterface|mixed
      */
     public function execute($command, callable $next)
     {
@@ -38,7 +37,7 @@ class JwtVerifyUser implements Middleware
         } catch (\Exception $e) {
             $this->resultHandler
                 ->setErrors(["authorization" => ["User authorization failed."]])
-                ->setCode(403);
+                ->setStatusCode(403);
 
             return $this->resultHandler;
         }

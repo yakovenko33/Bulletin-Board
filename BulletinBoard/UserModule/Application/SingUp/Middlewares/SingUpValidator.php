@@ -1,24 +1,13 @@
 <?php
 
 
-namespace BulletinBoard\UserModule\Application\SingUp\Middlewares;
+namespace BulletinBoard\UserModule\Application\SingUp\Middlewares; //middleware
 
 
-use League\Tactician\Middleware;
 use BulletinBoard\CommonModule\Bus\Validator\ValidatorRoot;
 
-class SingUpValidator extends ValidatorRoot implements Middleware
+class SingUpValidator extends ValidatorRoot
 {
-    /**
-     * @param object $command
-     * @param callable $next
-     * @return mixed|void
-     */
-    public function execute($command, callable $next)
-    {
-       return  $this->validate($command->toArray()) ? $next($command) : $this->resultHandler;
-    }
-
     /**
      * @return array
      */

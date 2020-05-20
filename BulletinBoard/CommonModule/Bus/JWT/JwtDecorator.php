@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MyProject\CommonModule\JWT;
+namespace BulletinBoard\CommonModule\Bus\JWT;
 
 use \Firebase\JWT\JWT;
 

@@ -6,6 +6,9 @@ namespace BulletinBoard\UserModule\UI\Controllers;
 
 use App\Http\Controllers\Controller;
 use BulletinBoard\CommonModule\UI\Response\Response;
+use BulletinBoard\UserModule\Application\SingIn\Middlewares\SingInValidator;
+use BulletinBoard\UserModule\Application\SingIn\Query\SingIn;
+use BulletinBoard\UserModule\Application\SingIn\Service\SingInHandler;
 use BulletinBoard\UserModule\Application\SingUp\Command\SingUp;
 use BulletinBoard\UserModule\Application\SingUp\Middlewares\SingUpValidator;
 use BulletinBoard\UserModule\Application\SingUp\Service\SingUpHandler;
@@ -37,7 +40,12 @@ class UserController extends Controller
      */
     public function test(Request $request): JsonResponse
     {
-        return response()->json(['data' => "work"]);
+        if (!$result = null) {
+            $result = "not null";
+        } else {
+            $result = "null";
+        }
+        return response()->json(['data' => $result]);
     }
 
     /**
@@ -54,5 +62,21 @@ class UserController extends Controller
         );
 
         return $this->getResponse($resultHandler); //return response()->json(["result" => "work/"]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function singIn(Request $request): JsonResponse
+    {
+        $this->bus->addHandler(SingIn::class, SingInHandler::class);
+        $resultHandler = $this->bus->dispatch(
+            SingIn::class,
+            $request->all(),
+            [SingInValidator::class]
+        );
+
+        return $this->getResponse($resultHandler);
     }
 }

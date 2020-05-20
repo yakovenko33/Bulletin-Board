@@ -27,4 +27,15 @@ class User extends Model
         'email',
         'password',
     ];
+
+    /**
+     * @return array
+     */
+    public function toJwtArray(): array
+    {
+        return [
+            "id" => $this->id,
+            "email" => $this->email,
+        ];
+    }
 }

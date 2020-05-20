@@ -1,12 +1,12 @@
 <?php
 
 
-namespace BulletinBoard\CommonModule\Exception;
+namespace BulletinBoard\UserModule\Application\SingIn\Exception;
 
 
 use Throwable;
 
-class ProblemWithDatabase extends \Exception
+class CheckPassword extends \Exception
 {
     /**
      * @var array
@@ -21,7 +21,7 @@ class ProblemWithDatabase extends \Exception
      */
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
-        $this->error = ["database" => ["problem-with-database"]];
+        $this->error = ["verify" => ["check-password"]];
         parent::__construct($message, $code, $previous);
     }
 

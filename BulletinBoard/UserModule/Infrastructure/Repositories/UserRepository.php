@@ -24,7 +24,9 @@ class UserRepository implements UserRepositoryInterface
                 "first_name" => $commandQuery->getFirstName(),
                 "last_name" => $commandQuery->getLastName(),
                 "email" => $commandQuery->getEmail(),
-                "password" => Hash::make($commandQuery->getPassword()),
+                "password" => Hash::make($commandQuery->getPassword(), [
+                    'rounds' => 12
+                ]),
             ]);
 
             $user->save();
@@ -34,5 +36,21 @@ class UserRepository implements UserRepositoryInterface
         }
 
         return !empty($user);
+    }
+
+    /**
+     * @param string $email
+     * @return User|null
+     */
+    public function findByEmail(string $email): ?User
+    {
+        try {
+            $user = User::where('active', 1)->first();
+        } catch (QueryException $e) {
+            Log::error($e->getMessage() . $e->getTraceAsString());
+            $user = null;
+        }
+
+        return $user;
     }
 }

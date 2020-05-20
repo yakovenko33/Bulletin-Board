@@ -1,12 +1,8 @@
 <?php
+namespace BulletinBoard\CommonModule\Bus\Command;
 
 
-namespace MyProject\CommonModule\JWT\Command;
-
-
-use MyProject\CommonModule\JWT\Command\Interfaces\VerifyCommandQueryInterface;
-
-class VerifyCommandQuery implements VerifyCommandQueryInterface
+class VerifyCommandQuery
 {
     /**
      * @var string
