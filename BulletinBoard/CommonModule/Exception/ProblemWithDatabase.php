@@ -21,7 +21,7 @@ class ProblemWithDatabase extends \Exception
      */
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
-        $this->error = ["database" => ["problem-with-database"]];
+        $this->error = ["database" => ["Проблемы на сервере, попробуйте позже."]];
         parent::__construct($message, $code, $previous);
     }
 

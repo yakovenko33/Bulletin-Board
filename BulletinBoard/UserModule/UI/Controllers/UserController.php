@@ -13,6 +13,7 @@ use BulletinBoard\UserModule\Application\SingUp\Command\SingUp;
 use BulletinBoard\UserModule\Application\SingUp\Middlewares\SingUpValidator;
 use BulletinBoard\UserModule\Application\SingUp\Service\SingUpHandler;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 use Joselfonseca\LaravelTactician\CommandBusInterface;
 use Illuminate\Http\Request;
 
@@ -52,8 +53,20 @@ class UserController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
+    public function testPost(Request $request): JsonResponse
+    {
+        return response()->json($request->all(), 200);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function singUp(Request $request): JsonResponse
     {
+        //Log::info(print_r($request->all(),true));
+        //return response()->json($request->all(), 500);
+        //die;
         $this->bus->addHandler(SingUp::class, SingUpHandler::class);
         $resultHandler = $this->bus->dispatch(
             SingUp::class,
@@ -70,6 +83,9 @@ class UserController extends Controller
      */
     public function singIn(Request $request): JsonResponse
     {
+//        Log::info(print_r($request->all(),true));
+//        return response()->json($request->all(), 500);
+//        die;
         $this->bus->addHandler(SingIn::class, SingInHandler::class);
         $resultHandler = $this->bus->dispatch(
             SingIn::class,

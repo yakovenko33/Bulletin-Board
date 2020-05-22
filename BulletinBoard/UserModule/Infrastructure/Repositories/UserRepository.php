@@ -15,9 +15,9 @@ class UserRepository implements UserRepositoryInterface
 {
     /**
      * @param CommandQueryInterface $commandQuery
-     * @return bool
+     * @return bool|null
      */
-    public function addUser(CommandQueryInterface $commandQuery): bool
+    public function addUser(CommandQueryInterface $commandQuery): ?User
     {
         try {
             $user = User::create([
@@ -35,7 +35,7 @@ class UserRepository implements UserRepositoryInterface
             $user = null;
         }
 
-        return !empty($user);
+        return $user;
     }
 
     /**
@@ -45,8 +45,9 @@ class UserRepository implements UserRepositoryInterface
     public function findByEmail(string $email): ?User
     {
         try {
-            $user = User::where('active', 1)->first();
-        } catch (QueryException $e) {
+            $user = User::where('email', $email)->first();
+            //throw new \Exception("123");
+        } catch (QueryException $e) { //Exception
             Log::error($e->getMessage() . $e->getTraceAsString());
             $user = null;
         }

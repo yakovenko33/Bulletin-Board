@@ -21,7 +21,7 @@ class CheckPassword extends \Exception
      */
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
-        $this->error = ["verify" => ["check-password"]];
+        $this->error = ["verify" => ["Пароль или email введен не корректно."]];
         parent::__construct($message, $code, $previous);
     }
 

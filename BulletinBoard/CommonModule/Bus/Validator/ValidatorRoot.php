@@ -20,10 +20,10 @@ abstract class ValidatorRoot implements Middleware
     /**
      * @var array
      */
-    const MESSAGES_VALIDATOR = [
-        'required' => ':attribute-is-required',
-        'max' => ":attribute-greater-than-:max",
-    ];
+//    const MESSAGES_VALIDATOR = [
+//        'required' => ':attribute-is-required',
+//        'max' => ":attribute-greater-than-:max",
+//    ];
 
     /**
      * UserRegisterValidator constructor.
@@ -54,7 +54,7 @@ abstract class ValidatorRoot implements Middleware
         if ($validator->fails()) {
             $this->resultHandler
                 ->setErrors($validator->errors()->getMessages())//;
-                ->setStatusCode(400);
+                ->setStatusCode(422);
 
             return false;
         }
@@ -68,11 +68,16 @@ abstract class ValidatorRoot implements Middleware
      */
     private function make(array $data = [])
     {
-        return Validator::make($data, $this->getRules(), self::MESSAGES_VALIDATOR);
+        return Validator::make($data, $this->getRules(),  $this->getMessagesValidator());//self::MESSAGES_VALIDATOR
     }
 
     /**
      * @return array
      */
     abstract protected function getRules(): array;
+
+    /**
+     * @return array
+     */
+    abstract protected function getMessagesValidator(): array;
 }

@@ -24,7 +24,7 @@ class Kernel extends HttpKernel
     ];
 
     /**
-     * The application's route middleware groups.
+     * The application's router middleware groups.
      *
      * @var array
      */
@@ -46,7 +46,7 @@ class Kernel extends HttpKernel
     ];
 
     /**
-     * The application's route middleware.
+     * The application's router middleware.
      *
      * These middleware may be assigned to groups or used individually.
      *

@@ -13,7 +13,7 @@ interface UserRepositoryInterface
      * @param CommandQueryInterface $commandQuery
      * @return bool
      */
-    public function addUser(CommandQueryInterface $commandQuery): bool;
+    public function addUser(CommandQueryInterface $commandQuery): ?User;
 
     /**
      * @param string $email

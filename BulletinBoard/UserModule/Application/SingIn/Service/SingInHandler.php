@@ -52,9 +52,8 @@ class SingInHandler
             $this->checkPassword($commandQuery, $user);
             $this->resultHandler
                 ->setResult([
-                    "jwt-token" => JwtDecorator::createToken($user->toJwtArray())
-                ])
-                ->setStatusCode();
+                    "jwt_token" => JwtDecorator::createToken($user->toJwtArray())
+                ]);
         } catch (ProblemWithDatabase $e) {
             $this->resultHandler->setErrors($e->getError())->setStatusCode();
         } catch (CheckPassword $e) {
@@ -71,7 +70,7 @@ class SingInHandler
      */
     private function checkPassword(CommandQueryInterface $commandQuery, User $user): void
     {
-        if (Hash::check($commandQuery->getPassword(), $user->password)) {
+        if (!Hash::check($commandQuery->getPassword(), $user->password)) {
             throw new CheckPassword();
         }
     }

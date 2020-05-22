@@ -6,6 +6,7 @@ namespace BulletinBoard\UserModule\Application\SingUp\Service;
 
 use BulletinBoard\CommonModule\Bus\Command\CommandQueryInterface;
 use BulletinBoard\CommonModule\Bus\Handler\ResultHandlerInterface;
+use BulletinBoard\CommonModule\Bus\JWT\JwtDecorator;
 use BulletinBoard\UserModule\Infrastructure\Interfaces\UserRepositoryInterface;
 
 class SingUpHandler
@@ -39,11 +40,21 @@ class SingUpHandler
      */
     public function handle(CommandQueryInterface $commandQuery): ResultHandlerInterface
     {
-        return $this->repository->addUser($commandQuery)
-            ? $this->resultHandler
+        if ($user = $this->repository->addUser($commandQuery)) {
+            $this->resultHandler->setResult(["jwt_token" => JwtDecorator::createToken($user->toJwtArray())])
+                ->setStatusCode(201);
+        } else {
+            $this->resultHandler
+                ->setErrors(["database" => ["Проблемы на сервере, попробуйте позже."]]) //problem-connecting-database
+                ->setStatusCode();
+        }
+
+        return $this->resultHandler;
+        /*return $this->repository->addUser($commandQuery)
+            ? $this->resultHandler->setResult()
                 ->setStatusCode(201) // ->setResult(["id" => 1])
             : $this->resultHandler
-                ->setErrors(["database" => ["problem-connecting-database"]])
-                ->setStatusCode();
+                ->setErrors(["database" => ["Проблемы на сервере, попробуйте позже."]]) //problem-connecting-database
+                ->setStatusCode();*/
     }
 }

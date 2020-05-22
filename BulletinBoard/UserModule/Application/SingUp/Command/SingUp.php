@@ -34,8 +34,8 @@ class SingUp implements CommandQueryInterface
      */
     public function __construct(array $data = [])
     {
-        $this->firstName = $data["first_name"];
-        $this->lastName = $data["last_name"];
+        $this->firstName = $data["name"]; //first_name
+        $this->lastName = $data["surname"];
         $this->email = $data["email"];
         $this->password = $data["password"];
     }
@@ -78,8 +78,8 @@ class SingUp implements CommandQueryInterface
     public function toArray(): array
     {
         return [
-            "first-name" => $this->firstName,
-            "last-name" => $this->lastName,
+            "name" => $this->firstName,
+            "surname" => $this->lastName,
             "email" => $this->email,
             "password" => $this->password
         ];
