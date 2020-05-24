@@ -22,7 +22,7 @@ class SingIn implements CommandQueryInterface
      * SingIn constructor.
      * @param array $data
      */
-    public function __construct(array $data = [])
+    public function __construct(array $data)
     {
         $this->email = $data["email"];
         $this->password = $data["password"];

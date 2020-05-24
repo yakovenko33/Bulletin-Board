@@ -18,14 +18,6 @@ abstract class ValidatorRoot implements Middleware
     protected $resultHandler;
 
     /**
-     * @var array
-     */
-//    const MESSAGES_VALIDATOR = [
-//        'required' => ':attribute-is-required',
-//        'max' => ":attribute-greater-than-:max",
-//    ];
-
-    /**
      * UserRegisterValidator constructor.
      * @param ResultHandlerInterface $resultHandler
      */

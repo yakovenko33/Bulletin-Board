@@ -8,7 +8,7 @@ export default {
     },
 
     getters: {
-        isAuthenticated : state => {
+        isAuthenticated: state => {
             return state.token;
         }
     },

@@ -32,7 +32,7 @@ class SingUp implements CommandQueryInterface
      * SingUp constructor.
      * @param array $data
      */
-    public function __construct(array $data = [])
+    public function __construct(array $data)
     {
         $this->firstName = $data["name"]; //first_name
         $this->lastName = $data["surname"];

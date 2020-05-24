@@ -11,7 +11,7 @@ interface UserRepositoryInterface
 {
     /**
      * @param CommandQueryInterface $commandQuery
-     * @return bool
+     * @return User|null
      */
     public function addUser(CommandQueryInterface $commandQuery): ?User;
 

@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '../store/index';
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
@@ -8,11 +9,20 @@ import SingIn from "../pages/SingIn/index";
 import SingUp from "../pages/SingUp/index";
 import PersonalPage from "../pages/PersonalPage/index";
 
+const isAuthenticated = (to, from, next) => {
+    if (store.getters["user/isAuthenticated"]) { //user.
+        next();
+        return;
+    }
+    next("/sing-in");
+};
+
 export default new VueRouter({
     routes: [
         {
             path: "/",
-            component:  Main
+            component:  Main,
+            beforeEnter: isAuthenticated
         },
         {
             name: "sing-in",
@@ -26,7 +36,8 @@ export default new VueRouter({
         {
             name: "personal",
             path: "/personal",
-            component:  PersonalPage
+            component:  PersonalPage,
+            beforeEnter: isAuthenticated
         }
     ]
 });

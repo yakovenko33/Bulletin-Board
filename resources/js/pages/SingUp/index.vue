@@ -150,7 +150,7 @@
                     </div>
 
                     <div class="form-group mr-auto col-xs-4 col-sm-10 col-md-10" style="text-align: center;">
-                        <p>Уже в BulletinBoard? <a href="#">Войти</a></p>
+                        <p>Уже в BulletinBoard? <router-link to="/sing-in">Войти</router-link></p>
                     </div>
                 </form>
             </div>
