@@ -1,6 +1,7 @@
 <?php
 
-namespace BulletinBoard\BulletinBoard\CommonModule\Infrastructure\Middleware;
+namespace BulletinBoard\CommonModule\Infrastructure\Middleware;
+
 
 use Illuminate\Http\Request;
 use Closure;

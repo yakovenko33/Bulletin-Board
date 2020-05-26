@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MyProject\CommonModule\JWT\Middleware;
+namespace BulletinBoard\CommonModule\JWT\Middleware;
 
 
 use BulletinBoard\CommonModule\Bus\Handler\ResultHandlerInterface;
