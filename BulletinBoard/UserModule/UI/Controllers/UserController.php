@@ -19,7 +19,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Joselfonseca\LaravelTactician\CommandBusInterface;
 use Illuminate\Http\Request;
-use MyProject\CommonModule\JWT\Middleware\JwtVerifyUser;
+use BulletinBoard\CommonModule\JWT\Middleware\JwtVerifyUser;
 
 class UserController extends Controller
 {
