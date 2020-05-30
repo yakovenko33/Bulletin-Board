@@ -21,6 +21,7 @@ export default new VueRouter({
     routes: [
         {
             path: "/",
+            name: "main",
             component:  Main,
             beforeEnter: isAuthenticated
         },
@@ -30,6 +31,7 @@ export default new VueRouter({
             component:  SingIn
         },
         {
+            name: "sing-up",
             path: "/sing-up",
             component:  SingUp
         },

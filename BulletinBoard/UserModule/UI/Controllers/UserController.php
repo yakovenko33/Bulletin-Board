@@ -45,21 +45,7 @@ class UserController extends Controller
      */
     public function test(Request $request): JsonResponse
     {
-        if (!$result = null) {
-            $result = "not null";
-        } else {
-            $result = "null";
-        }
-        return response()->json(['data' => $result]);
-    }
-
-    /**
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function testPost(Request $request): JsonResponse
-    {
-        return response()->json($request->all(), 200);
+        return response()->json(['data' => "test"]);
     }
 
     /**
@@ -94,19 +80,5 @@ class UserController extends Controller
         return $this->getResponse($resultHandler);
     }
 
-    /**
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function AddAdvert(Request $request): JsonResponse
-    {
-        $this->bus->addHandler(AddAdvert::class, AddAdvertHandler::class);
-        $resultHandler = $this->bus->dispatch(
-            AddAdvert::class,
-            $request->all(),
-            [JwtVerifyUser::class, AddAdvertValidator::class]
-        );
 
-        return $this->getResponse($resultHandler);
-    }
 }

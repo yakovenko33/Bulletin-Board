@@ -19,6 +19,8 @@ class CreateTableAdverts extends Migration
                 $table->unsignedInteger("user_id");
                 $table->string("headline", 50);
                 $table->string("text", 255);
+                $table->string("image", 50);
+                $table->timestamp("created_at")->useCurrent();
             });
         }
     }

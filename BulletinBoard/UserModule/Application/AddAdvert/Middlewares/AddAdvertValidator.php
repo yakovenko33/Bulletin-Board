@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types = 1);
 
 namespace BulletinBoard\UserModule\Application\AddAdvert\Middlewares;
 
@@ -15,7 +15,8 @@ class AddAdvertValidator extends ValidatorRoot
     {
         return [
             "headline" => "required|string|max:50",
-            "text" => "required|string|max:250"
+            "text" => "required|string|max:250",
+            "image" => "required|max:1900|mimes:jpeg,png"
         ];
     }
 
@@ -29,6 +30,9 @@ class AddAdvertValidator extends ValidatorRoot
             'headline.max' => "Длина заголовка не должна превышать :max.",
             'text.required' => 'Поле текс обязательно к заполнению.',
             'text.max' => "Длина текста не должжно превышать :max.",
+            'image.required' => "Вы не добавили файл.",
+            'image.max' => "Длина файла не должжно превышать :max. КБ.",
+            'image.mimes' => "Формат файла указан не верно (разрешон jpeg,png).",
         ];
     }
 }

@@ -1,12 +1,16 @@
 <?php
-
+declare(strict_types = 1);
 
 namespace BulletinBoard\UserModule\Application\AddAdvert\Service;
 
 
 use BulletinBoard\CommonModule\Bus\Command\CommandQueryInterface;
 use BulletinBoard\CommonModule\Bus\Handler\ResultHandlerInterface;
+use BulletinBoard\CommonModule\Exception\ProblemWithDatabase;
+use BulletinBoard\UserModule\Application\AddAdvert\Events\SaveImage;
 use BulletinBoard\UserModule\Infrastructure\Interfaces\AdvertRepositoryInterface;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Storage;
 
 class AddAdvertHandler
 {
@@ -39,10 +43,18 @@ class AddAdvertHandler
      */
     public function handle(CommandQueryInterface $commandQuery): ResultHandlerInterface
     {
-        return $this->repository->addAdvert($commandQuery)
-            ? $this->resultHandler->setStatusCode(201)
-            : $this->resultHandler
-                ->setErrors(["database" => "Проблемы на сервере, попробуйте позже."])
-                ->setStatusCode(500);
+        try {
+            $advert = $this->repository->addAdvert($commandQuery);
+            if (empty($advert)) {
+                throw new ProblemWithDatabase();
+            }
+
+            Event::dispatch(new SaveImage($commandQuery->getImage()));
+            $this->resultHandler->setResult(["id" => $advert->id])->setStatusCode(201);
+        } catch (ProblemWithDatabase $e) {
+            $this->resultHandler->setErrors($e->getError())->setStatusCode();
+        }
+
+        return $this->resultHandler;
     }
 }

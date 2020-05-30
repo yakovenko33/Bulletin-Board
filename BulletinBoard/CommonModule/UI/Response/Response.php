@@ -22,10 +22,5 @@ trait Response
             "errors" => $hasErrors ? $resultHandler->getErrors() : [],
             'status' => $hasErrors ? 'errors' : 'success'
         ], $resultHandler->getStatusCode());
-
-        /*return response()->json([
-            "data" => $hasErrors ? $resultHandler->getErrors() : $resultHandler->getResult(),
-            'status' => $hasErrors ? 'errors' : 'success'
-        ], $resultHandler->getCode());*/
     }
 }

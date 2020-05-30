@@ -164,7 +164,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .mr-auto {
         margin-right: auto;
         margin-left: auto;

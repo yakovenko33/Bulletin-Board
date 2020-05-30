@@ -3,6 +3,7 @@
         <div class="row">
             <div
                 class="col-md-2 page-toggle"
+                :class="{'active-toggle': (currentPage === 'ProfileEditor')}"
                 style="padding: 0"
                 @click.prevent="choicePage('ProfileEditor')"
             >
@@ -14,6 +15,7 @@
             <div
                 class="col-md-2 page-toggle"
                 style="padding: 0"
+                :class="{'active-toggle': (currentPage === 'AddAdvert')}"
                 @click.prevent="choicePage('AddAdvert')"
             >
                 <span>
@@ -44,7 +46,7 @@
         },
         data(){
             return {
-                currentPage: ProfileEditor
+                currentPage: ProfileEditor,
             }
         },
         methods:{
@@ -86,9 +88,9 @@
         transition: 0.5s;
     }
 
-    /*.page-toggle:active {*/
-    /*    background-color: #1E90FF;*/
-    /*    border: none;*/
-    /*    transition: background 0s;*/
-    /*}*/
+    .active-toggle { /*:active*/
+        background-color: #00BFFF; /*#00BFFF*/
+        /*border: none;*/
+        transition: background 0s;
+    }
 </style>

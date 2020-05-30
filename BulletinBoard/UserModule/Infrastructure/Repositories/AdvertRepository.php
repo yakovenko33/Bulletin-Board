@@ -18,13 +18,14 @@ class AdvertRepository implements AdvertRepositoryInterface
      * @param CommandQueryInterface $commandQuery
      * @return bool
      */
-    public function addAdvert(CommandQueryInterface $commandQuery): bool
+    public function addAdvert(CommandQueryInterface $commandQuery): ?Advert
     {
         try {
             $advert = Advert::create([
+                "user_id" => $commandQuery->getUserId(),
                 "headline" => $commandQuery->getHeadline(),
                 "text" => $commandQuery->getText(),
-                "user_id" => $commandQuery->getUserId()
+                "image" => $commandQuery->getImage()->hashName()
             ]);
 
             $advert->save();
@@ -33,6 +34,6 @@ class AdvertRepository implements AdvertRepositoryInterface
             $advert = null;
         }
 
-        return !empty($advert);
+        return $advert;
     }
 }

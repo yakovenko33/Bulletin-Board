@@ -6,6 +6,7 @@ namespace BulletinBoard\CommonModule\JWT\Middleware;
 
 use BulletinBoard\CommonModule\Bus\Handler\ResultHandlerInterface;
 use BulletinBoard\CommonModule\Bus\JWT\JwtDecorator;
+use Illuminate\Support\Facades\Log;
 use League\Tactician\Middleware;
 
 class JwtVerifyUser implements Middleware
@@ -33,6 +34,7 @@ class JwtVerifyUser implements Middleware
     {
         try {
             $decoded = JwtDecorator::getDataByToken($command->getJwtToken());
+            Log::error($decoded->data->id);
             $command->setUserId($decoded->data->id);
         } catch (\Exception $e) {
             $this->resultHandler

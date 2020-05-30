@@ -2,7 +2,7 @@
     <div id="app">
         <header-block v-if="this.isAuthenticated"></header-block>
         <router-view></router-view>
-        <footer-block></footer-block>
+<!--        <footer-block></footer-block>-->
     </div>
 </template>
 

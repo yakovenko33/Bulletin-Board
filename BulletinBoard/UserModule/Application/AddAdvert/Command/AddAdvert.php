@@ -1,11 +1,12 @@
 <?php
-
+declare(strict_types = 1);
 
 namespace BulletinBoard\UserModule\Application\AddAdvert\Command;
 
 
 use BulletinBoard\CommonModule\Bus\Command\CommandQueryInterface;
 use BulletinBoard\CommonModule\Bus\Command\VerifyCommandQuery;
+use Illuminate\Http\UploadedFile;
 
 class AddAdvert extends VerifyCommandQuery implements CommandQueryInterface
 {
@@ -20,14 +21,9 @@ class AddAdvert extends VerifyCommandQuery implements CommandQueryInterface
     private $text;
 
     /**
-     * @var string
+     * @var UploadedFile
      */
-    private $token;
-
-    /**
-     * @var
-     */
-    private $img; // next time add images (img, png);
+    private $image;
 
     /**
      * AddAdvert constructor.
@@ -39,6 +35,7 @@ class AddAdvert extends VerifyCommandQuery implements CommandQueryInterface
 
         $this->headline = $data["headline"];
         $this->text = $data["text"];
+        $this->image = $data["image"];
     }
 
     /**
@@ -58,13 +55,22 @@ class AddAdvert extends VerifyCommandQuery implements CommandQueryInterface
     }
 
     /**
+     * @return UploadedFile
+     */
+    public function getImage(): UploadedFile
+    {
+        return $this->image;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
     {
         return [
             "headline" => $this->headline,
-            "text" => $this->text
+            "text" => $this->text,
+            "image" => $this->image
         ];
     }
 }

@@ -24,6 +24,8 @@ class Advert extends Model
     protected $fillable = [
         "user_id",
         "headline",
-        "text"
+        "text",
+        "image",
+        "created_at"
     ];
 }

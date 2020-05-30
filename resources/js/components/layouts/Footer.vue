@@ -1,6 +1,12 @@
 <template>
-    <footer>
-<!--        <h2>It is footer</h2>-->
+    <footer class="page-footer font-small blue">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="https://mdbootstrap.com/"> BulletinBoard.com</a>
+        </div>
+        <!-- Copyright -->
+
     </footer>
 </template>
 
